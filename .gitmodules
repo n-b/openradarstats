@@ -1,0 +1,3 @@
+[submodule "OCFW"]
+	path = OCFW
+	url = git://github.com/n-b/OCFW.git

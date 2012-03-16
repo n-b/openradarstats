@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		37A1605D1513FC460058600E /* KVCMapping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A1605B1513FC2D0058600E /* KVCMapping.framework */; };
+		37A160601513FC7E0058600E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A1605F1513FC7E0058600E /* CoreData.framework */; };
 		37D16DA01513F78000340A73 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D16D9F1513F78000340A73 /* Foundation.framework */; };
 		37D16DA31513F78000340A73 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D16DA21513F78000340A73 /* main.m */; };
 		37D16DA71513F78000340A73 /* radarstats.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37D16DA61513F78000340A73 /* radarstats.1 */; };
@@ -26,10 +28,13 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		37A1605B1513FC2D0058600E /* KVCMapping.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KVCMapping.framework; sourceTree = "<group>"; };
+		37A1605E1513FC5B0058600E /* radars.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = radars.json; sourceTree = "<group>"; };
+		37A1605F1513FC7E0058600E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		37D16D9B1513F78000340A73 /* radarstats */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = radarstats; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D16D9F1513F78000340A73 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		37D16DA21513F78000340A73 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		37D16DA51513F78000340A73 /* radarstats-Prefix.pch */ = {isa = PBXFileReference; path = "radarstats-Prefix.pch"; sourceTree = "<group>"; };
+		37D16DA51513F78000340A73 /* radarstats-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "radarstats-Prefix.pch"; sourceTree = "<group>"; };
 		37D16DA61513F78000340A73 /* radarstats.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = radarstats.1; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -38,17 +43,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				37A160601513FC7E0058600E /* CoreData.framework in Frameworks */,
 				37D16DA01513F78000340A73 /* Foundation.framework in Frameworks */,
+				37A1605D1513FC460058600E /* KVCMapping.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		37A160571513FC2D0058600E /* OCFW */ = {
+			isa = PBXGroup;
+			children = (
+				37A1605A1513FC2D0058600E /* macosx */,
+			);
+			name = OCFW;
+			path = OCFW/Frameworks;
+			sourceTree = "<group>";
+		};
+		37A1605A1513FC2D0058600E /* macosx */ = {
+			isa = PBXGroup;
+			children = (
+				37A1605B1513FC2D0058600E /* KVCMapping.framework */,
+			);
+			path = macosx;
+			sourceTree = "<group>";
+		};
 		37D16D901513F78000340A73 = {
 			isa = PBXGroup;
 			children = (
 				37D16DA11513F78000340A73 /* radarstats */,
+				37A160571513FC2D0058600E /* OCFW */,
 				37D16D9E1513F78000340A73 /* Frameworks */,
 				37D16D9C1513F78000340A73 /* Products */,
 			);
@@ -65,6 +90,7 @@
 		37D16D9E1513F78000340A73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				37A1605F1513FC7E0058600E /* CoreData.framework */,
 				37D16D9F1513F78000340A73 /* Foundation.framework */,
 			);
 			name = Frameworks;
@@ -73,6 +99,7 @@
 		37D16DA11513F78000340A73 /* radarstats */ = {
 			isa = PBXGroup;
 			children = (
+				37A1605E1513FC5B0058600E /* radars.json */,
 				37D16DA21513F78000340A73 /* main.m */,
 				37D16DA61513F78000340A73 /* radarstats.1 */,
 				37D16DA41513F78000340A73 /* Supporting Files */,
@@ -195,6 +222,10 @@
 		37D16DAB1513F78000340A73 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/OCFW/Frameworks/macosx\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "radarstats/radarstats-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -204,6 +235,10 @@
 		37D16DAC1513F78000340A73 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/OCFW/Frameworks/macosx\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "radarstats/radarstats-Prefix.pch";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -229,6 +264,7 @@
 				37D16DAC1513F78000340A73 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
