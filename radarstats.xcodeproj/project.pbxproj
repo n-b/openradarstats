@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		37A1605D1513FC460058600E /* KVCMapping.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A1605B1513FC2D0058600E /* KVCMapping.framework */; };
 		37A160601513FC7E0058600E /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37A1605F1513FC7E0058600E /* CoreData.framework */; };
+		37A160631513FD460058600E /* CoreDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A160621513FD460058600E /* CoreDataManager.m */; };
+		37A160661513FD830058600E /* NSFileManager+StandardPaths.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A160651513FD830058600E /* NSFileManager+StandardPaths.m */; };
+		37A160691513FDA20058600E /* NSError+MultipleErrorsCombined.m in Sources */ = {isa = PBXBuildFile; fileRef = 37A160681513FDA20058600E /* NSError+MultipleErrorsCombined.m */; };
 		37D16DA01513F78000340A73 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 37D16D9F1513F78000340A73 /* Foundation.framework */; };
 		37D16DA31513F78000340A73 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 37D16DA21513F78000340A73 /* main.m */; };
 		37D16DA71513F78000340A73 /* radarstats.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = 37D16DA61513F78000340A73 /* radarstats.1 */; };
@@ -31,6 +34,12 @@
 		37A1605B1513FC2D0058600E /* KVCMapping.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = KVCMapping.framework; sourceTree = "<group>"; };
 		37A1605E1513FC5B0058600E /* radars.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = radars.json; sourceTree = "<group>"; };
 		37A1605F1513FC7E0058600E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		37A160611513FD460058600E /* CoreDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CoreDataManager.h; sourceTree = "<group>"; };
+		37A160621513FD460058600E /* CoreDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CoreDataManager.m; sourceTree = "<group>"; };
+		37A160641513FD830058600E /* NSFileManager+StandardPaths.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSFileManager+StandardPaths.h"; sourceTree = "<group>"; };
+		37A160651513FD830058600E /* NSFileManager+StandardPaths.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSFileManager+StandardPaths.m"; sourceTree = "<group>"; };
+		37A160671513FDA20058600E /* NSError+MultipleErrorsCombined.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSError+MultipleErrorsCombined.h"; sourceTree = "<group>"; };
+		37A160681513FDA20058600E /* NSError+MultipleErrorsCombined.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSError+MultipleErrorsCombined.m"; sourceTree = "<group>"; };
 		37D16D9B1513F78000340A73 /* radarstats */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = radarstats; sourceTree = BUILT_PRODUCTS_DIR; };
 		37D16D9F1513F78000340A73 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		37D16DA21513F78000340A73 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -69,10 +78,25 @@
 			path = macosx;
 			sourceTree = "<group>";
 		};
+		37A1606A1513FE4C0058600E /* CoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				37A160671513FDA20058600E /* NSError+MultipleErrorsCombined.h */,
+				37A160681513FDA20058600E /* NSError+MultipleErrorsCombined.m */,
+				37A160611513FD460058600E /* CoreDataManager.h */,
+				37A160621513FD460058600E /* CoreDataManager.m */,
+				37A160641513FD830058600E /* NSFileManager+StandardPaths.h */,
+				37A160651513FD830058600E /* NSFileManager+StandardPaths.m */,
+			);
+			name = CoreDataManager;
+			path = radarstats;
+			sourceTree = "<group>";
+		};
 		37D16D901513F78000340A73 = {
 			isa = PBXGroup;
 			children = (
 				37D16DA11513F78000340A73 /* radarstats */,
+				37A1606A1513FE4C0058600E /* CoreDataManager */,
 				37A160571513FC2D0058600E /* OCFW */,
 				37D16D9E1513F78000340A73 /* Frameworks */,
 				37D16D9C1513F78000340A73 /* Products */,
@@ -166,6 +190,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				37D16DA31513F78000340A73 /* main.m in Sources */,
+				37A160631513FD460058600E /* CoreDataManager.m in Sources */,
+				37A160661513FD830058600E /* NSFileManager+StandardPaths.m in Sources */,
+				37A160691513FDA20058600E /* NSError+MultipleErrorsCombined.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
