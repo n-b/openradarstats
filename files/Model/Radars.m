@@ -77,12 +77,15 @@
 @implementation AllYouCanEatDateTransformer
 {
     NSMutableArray * dateFormatters;
+    NSDataDetector * dataDetector;
+    NSCalendar * gregorian;
 }
 
 - (id)init
 {
     self = [super init];
     if (self) {
+        gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSGregorianCalendar];
         dateFormatters = [NSMutableArray new];
         NSArray * formats = [NSArray arrayWithObjects:
                              @"EEE, dd MMM yyyy HH:mm:ss zzz", 
@@ -122,10 +125,14 @@
         for (NSString * format in formats) {
             NSDateFormatter * dateFormatter = [NSDateFormatter new];
             [dateFormatter setLocale:[[NSLocale alloc] initWithLocaleIdentifier:@"en_US"]];
+            [dateFormatter setTimeZone:[NSTimeZone timeZoneForSecondsFromGMT:0]];
             [dateFormatter setDateFormat:format];
             [dateFormatters addObject:dateFormatter];
         }
 
+        NSError * error = nil;
+        dataDetector = [NSDataDetector dataDetectorWithTypes:NSTextCheckingTypeDate
+                                                       error:&error];
     }
     return self;
 }
@@ -135,19 +142,41 @@
     return [NSDate self];
 }
 
-- (id)transformedValue:(id)value
+- (id)transformedValue:(NSString*)value
 {
     if(![value isKindOfClass:[NSString self]] || [value length]==0)
         return nil;
     
-    for (NSDateFormatter * formatter in dateFormatters) {
-        NSDate* date = [formatter dateFromString:value];
-        if (date)
-            return date;
+    NSTextCheckingResult * result = [[dataDetector matchesInString:value options:0 range:NSMakeRange(0, [value length])] lastObject];
+    NSDate * date2 = result.date; // data detectors assume local timezone
+    NSDateComponents * components = [gregorian components:NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:date2];
+    if ( components.hour==12
+        && components.minute==0
+        && components.second==0) {
+        date2 = [date2 dateByAddingTimeInterval:-12*3600];// data detector creates dates at noon if no other info is passed, which is a bit of a fallacy.
     }
 
-    if(![value isEqual:@"NO"]&&![value isEqual:@"No"]&&![value isEqual:@"no"]&&![value isEqual:@"Yes"]&&![value isEqual:@"Unknown"]&&![value hasPrefix:@"Duplicate"])
-        NSLog(@"unparsed string : %@",value);
+    date2 = [date2 dateByAddingTimeInterval:(double)(int)[[NSTimeZone localTimeZone] secondsFromGMTForDate:date2]];
+    
+    NSDate * date1 = nil;
+    for (NSDateFormatter * formatter in dateFormatters) {
+        date1 = [formatter dateFromString:value];
+        if (date1)
+            break;
+    }
+    if(date1 && date2 && ![date1 isEqualToDate:date2])
+        NSLog(@"value: %@, datadetector: %@, dateformatters: %@",value, date2, date1);
+    
+    if (date1)
+        return date1;
+    if (date2) 
+    {
+        NSLog(@"data detector saves the day %@",value);
+        return date2;
+    }
+    
+//    if(![value isEqual:@"NO"]&&![value isEqual:@"No"]&&![value isEqual:@"no"]&&![value isEqual:@"Yes"]&&![value isEqual:@"Unknown"]&&![value hasPrefix:@"Duplicate"])
+//        NSLog(@"unparsed string : %@",value);
     return nil;
 }
 
