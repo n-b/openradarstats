@@ -1,6 +1,5 @@
 //
 //  NSError+MultipleErrorsCombined.h
-//  Bicyclette
 //
 //  Created by Nicolas Bouilleaud on 18/09/11.
 //  Copyright 2011 Nicolas Bouilleaud. All rights reserved.

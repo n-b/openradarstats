@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'radarstatistics' target in the 'radarstatistics' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif

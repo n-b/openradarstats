@@ -46,7 +46,7 @@ NSString * const CoreDataManagerErrorDomain = @"CoreDataManagerErrorDomain";
     if (self) {
         
         // Create mom
-		self.mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:modelName ofType:@"mom"]]]; 
+		self.mom = [[NSManagedObjectModel alloc] initWithContentsOfURL:[NSURL fileURLWithPath:[[NSBundle mainBundle] pathForResource:modelName ofType:@"momd"]]]; 
         
         // Create psc
 		self.psc = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.mom];

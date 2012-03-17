@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1171" systemVersion="11D50b" minimumToolsVersion="Xcode 4.1" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Radar" representedClassName="Radar" syncable="YES">
+        <attribute name="classification" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="Integer 32" defaultValueString="0" indexed="YES" syncable="YES"/>
+        <attribute name="originatedDate" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="product" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="productVersion" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="reproducible" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="resolvedDate" optional="YES" attributeType="Date" indexed="YES" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" indexed="YES" syncable="YES"/>
+        <attribute name="text" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="user" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Radar" positionX="-657" positionY="-144" width="128" height="210"/>
+    </elements>
+</model>
