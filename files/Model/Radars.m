@@ -137,15 +137,18 @@
 
 - (id)transformedValue:(id)value
 {
-    if(![value isKindOfClass:[NSString self]] || [value length]==0) return [NSDate distantPast];
+    if(![value isKindOfClass:[NSString self]] || [value length]==0)
+        return nil;
+    
     for (NSDateFormatter * formatter in dateFormatters) {
         NSDate* date = [formatter dateFromString:value];
         if (date)
             return date;
     }
+
     if(![value isEqual:@"NO"]&&![value isEqual:@"No"]&&![value isEqual:@"no"]&&![value isEqual:@"Yes"]&&![value isEqual:@"Unknown"]&&![value hasPrefix:@"Duplicate"])
         NSLog(@"unparsed string : %@",value);
-    return [NSDate distantFuture];
+    return nil;
 }
 
 
