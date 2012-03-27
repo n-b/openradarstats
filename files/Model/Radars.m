@@ -79,6 +79,7 @@
     NSMutableArray * dateFormatters;
     NSDataDetector * dataDetector;
     NSCalendar * gregorian;
+    NSDate * lastParsedDate;
 }
 
 - (id)init
@@ -148,7 +149,7 @@
         return nil;
     
     NSTextCheckingResult * result = [[dataDetector matchesInString:value options:0 range:NSMakeRange(0, [value length])] lastObject];
-    NSDate * date2 = result.date; // data detectors assume local timezone
+    NSDate * date2 = result.date;
     NSDateComponents * components = [gregorian components:NSHourCalendarUnit|NSMinuteCalendarUnit|NSSecondCalendarUnit fromDate:date2];
     if ( components.hour==12
         && components.minute==0
@@ -156,7 +157,8 @@
         date2 = [date2 dateByAddingTimeInterval:-12*3600];// data detector creates dates at noon if no other info is passed, which is a bit of a fallacy.
     }
 
-    date2 = [date2 dateByAddingTimeInterval:(double)(int)[[NSTimeZone localTimeZone] secondsFromGMTForDate:date2]];
+    if(result.timeZone==nil) // data detectors assume local timezone
+        date2 = [date2 dateByAddingTimeInterval:(double)(int)[[NSTimeZone localTimeZone] secondsFromGMTForDate:date2]];
     
     NSDate * date1 = nil;
     for (NSDateFormatter * formatter in dateFormatters) {
@@ -165,13 +167,26 @@
             break;
     }
     if(date1 && date2 && ![date1 isEqualToDate:date2])
-        NSLog(@"value: %@, datadetector: %@, dateformatters: %@",value, date2, date1);
+    {
+        NSLog(@"value: %@, dd: %@ df: %@. Laste date : %@",value, date2, date1, lastParsedDate);
+        if(lastParsedDate==nil || fabs([lastParsedDate timeIntervalSinceDate:date1]) < fabs([lastParsedDate timeIntervalSinceDate:date2]))
+        {
+            NSLog(@" choosing df");
+            lastParsedDate = date1;
+            return date1;
+        }
+        else {
+            NSLog(@" choosing dd");
+            lastParsedDate = date2;
+            return date2;
+        }
+    }
     
     if (date1)
         return date1;
     if (date2) 
     {
-        NSLog(@"data detector saves the day %@",value);
+        NSLog(@"data detector saves the day %@ > %@",value, date2);
         return date2;
     }
     
