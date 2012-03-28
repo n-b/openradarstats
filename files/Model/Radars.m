@@ -8,7 +8,6 @@
 
 #import "Radars.h"
 #import "NSFileManager+StandardPaths.h"
-#import <KVCMapping/NSObject+KVCMapping.h>
 #import "Radar.h"
 
 @interface AllYouCanEatDateTransformer : NSValueTransformer
